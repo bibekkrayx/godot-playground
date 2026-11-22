@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://qi3o5otw4cs5"]
+
+[ext_resource type="Script" uid="uid://chskp57f42xo7" path="res://scenes/pipes/pipes.gd" id="1_dq6nu"]
+[ext_resource type="PackedScene" uid="uid://b4r1eimt0vcba" path="res://scenes/laser/laser.tscn" id="1_ls657"]
+[ext_resource type="PackedScene" uid="uid://b88yhsolmki6j" path="res://scenes/pipe/pipe.tscn" id="2_dq6nu"]
+
+[node name="Pipes" type="Node2D" unique_id=999644565]
+scale = Vector2(2, 2)
+script = ExtResource("1_dq6nu")
+
+[node name="laser" parent="." unique_id=996556967 instance=ExtResource("1_ls657")]
+
+[node name="upper" parent="." unique_id=675812441 instance=ExtResource("2_dq6nu")]
+position = Vector2(0, -100)
+rotation = 3.1415927
+
+[node name="lower" parent="." unique_id=939291259 instance=ExtResource("2_dq6nu")]
+position = Vector2(0, 100)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=324236032]
+position = Vector2(165, 0)
+
+[node name="Timer" type="Timer" parent="." unique_id=718987823]
+wait_time = 15.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="laser" to="." method="_on_laser_body_entered"]
+[connection signal="body_entered" from="upper" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="lower" to="." method="_on_pipe_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

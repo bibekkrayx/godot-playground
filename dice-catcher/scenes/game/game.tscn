@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bhytlmcyhr7lk"]
+
+[ext_resource type="Script" uid="uid://b7rsbmmbdfmj1" path="res://scenes/game/game.gd" id="1_0sr1o"]
+[ext_resource type="Texture2D" uid="uid://djjponsttwqfs" path="res://assets/GemBg.png" id="1_sul5r"]
+[ext_resource type="PackedScene" uid="uid://c6wsbyjga68up" path="res://scenes/dice/dice.tscn" id="2_7h61r"]
+[ext_resource type="LabelSettings" uid="uid://duld38327t8oq" path="res://resources/title_label.tres" id="4_bdhmt"]
+[ext_resource type="AudioStream" uid="uid://rxwcie4b6wbb" path="res://assets/tetris.mp3" id="4_kelw5"]
+[ext_resource type="PackedScene" uid="uid://bx7c4mo02v7sl" path="res://scenes/fox/fox.tscn" id="5_lfrn8"]
+[ext_resource type="FontFile" uid="uid://dteiqmwvsiakg" path="res://assets/TitanOne-Regular.ttf" id="6_5i0tg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_87uf6"]
+font = ExtResource("6_5i0tg")
+font_size = 72
+font_color = Color(1, 0.49019608, 0.21568628, 1)
+outline_size = 9
+outline_color = Color(0.17254902, 0.02745098, 0.011764706, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.78431374)
+
+[node name="Game" type="Node" unique_id=966513611]
+process_mode = 3
+script = ExtResource("1_0sr1o")
+dice_scene = ExtResource("2_7h61r")
+
+[node name="GemBg" type="Sprite2D" parent="." unique_id=1374741526]
+position = Vector2(579, 316)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_sul5r")
+
+[node name="Label" type="Label" parent="." unique_id=1155435393]
+offset_left = 36.0
+offset_top = 21.0
+offset_right = 175.0
+offset_bottom = 77.0
+text = "0000"
+label_settings = ExtResource("4_bdhmt")
+
+[node name="GameOverLabel" type="Label" parent="." unique_id=599202144]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.5
+offset_top = -41.5
+offset_right = 210.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Game Over"
+label_settings = SubResource("LabelSettings_87uf6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=1667541305]
+stream = ExtResource("4_kelw5")
+autoplay = true
+parameters/looping = true
+
+[node name="Pausable" type="Node" parent="." unique_id=2086353358]
+process_mode = 1
+
+[node name="SpawnTimer" type="Timer" parent="Pausable" unique_id=1207954669]
+wait_time = 1.5
+autostart = true
+
+[node name="Fox" parent="Pausable" unique_id=1767791504 instance=ExtResource("5_lfrn8")]
+position = Vector2(553, 579)
+
+[connection signal="timeout" from="Pausable/SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="eaten_dice" from="Pausable/Fox" to="." method="_on_fox_eaten_dice"]

@@ -1,0 +1,30 @@
+# Godot editor cache
+.godot/
+
+# Godot generated import files
+.import/
+
+# Export files
+export.cfg
+export_presets.cfg
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Build artifacts
+build/
+dist/
+
+# Mono / C# build files (if used in future)
+.mono/
+mono_crash.*.json
