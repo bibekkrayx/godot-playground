@@ -52,7 +52,7 @@ scale = Vector2(0.8, 10)
 texture = ExtResource("1_0kheo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1476235179]
-position = Vector2(94, 0)
+position = Vector2(50, 0)
 shape = SubResource("RectangleShape2D_ca654")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1951297660]

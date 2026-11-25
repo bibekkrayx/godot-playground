@@ -4,19 +4,24 @@
 [ext_resource type="Texture2D" uid="uid://nbddm5qdc53x" path="res://assets/background/Parallax0.png" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bltfu33d1jw2b" path="res://scenes/tappy/tappy.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://qi3o5otw4cs5" path="res://scenes/pipes/pipes.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://difqmfommss2r" path="res://scenes/scrolling_bg/scrolling_bg.tscn" id="4_p57ef"]
+[ext_resource type="PackedScene" uid="uid://m5tmguub6m3" path="res://scenes/game_ui/game_ui.tscn" id="5_iywne"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 normal = Vector2(0, 1)
 distance = -27.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lnu2h"]
-distance = -1636.0
+distance = -1422.0
 
 [node name="Game" type="Node2D" unique_id=1392025490]
 script = ExtResource("1_lnu2h")
 pipes_scene = ExtResource("3_lnu2h")
 
+[node name="ScrollingBg" parent="." unique_id=970600214 instance=ExtResource("4_p57ef")]
+
 [node name="Parallax0" type="Sprite2D" parent="." unique_id=721558925]
+visible = false
 z_index = 10
 position = Vector2(507, 1541)
 scale = Vector2(1, 1.1999999)
@@ -44,5 +49,10 @@ position = Vector2(1157, 1062)
 wait_time = 2.5
 
 [node name="PipesHolder" type="Node2D" parent="." unique_id=1555713774]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=589145790]
+
+[node name="GameUi" parent="CanvasLayer" unique_id=844283303 instance=ExtResource("5_iywne")]
+metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

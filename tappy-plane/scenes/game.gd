@@ -8,7 +8,7 @@ extends Node2D
 @onready var pipes_holder: Node2D = $PipesHolder
 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	
@@ -36,3 +36,7 @@ func spawn_pipes():
 
 func _on_timer_timeout() -> void:
 	spawn_pipes()
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("test"):
+		GameManager.load_main_screen()

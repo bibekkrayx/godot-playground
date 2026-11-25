@@ -3,6 +3,7 @@ class_name Pipes
 extends Node2D
 
 const PIPE_SPEED: float = 120
+@onready var point_score_sound: AudioStreamPlayer = $PointScoreSound
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,8 +24,10 @@ func _on_timer_timeout() -> void:
 
 
 func _on_pipe_body_entered(body: Node2D) -> void:
-	print("lower pipe entered: ", name)
+	if body is Tappy: body.die()
 
 
 func _on_laser_body_entered(body: Node2D) -> void:
+	point_score_sound.play()
 	print("point score +1")
+	ScoreManager.add_point()
